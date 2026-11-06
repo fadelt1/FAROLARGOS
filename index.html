@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Argos Ambev · Farol de Documentos por Chofer (Fadel Transportes)</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    .saas-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+    }
+    .badge-vencido { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .badge-urgente { background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; }
+    .badge-alerta { background: #fefce8; color: #ca8a04; border: 1px solid #fef08a; }
+    .badge-vigente { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+    .badge-pending { background: #faf5ff; color: #9333ea; border: 1px solid #f3e8ff; }
+
+    .farol-pulse-red {
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+      animation: pulse-red 2s infinite;
+    }
+    @keyframes pulse-red {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+    }
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-blue-600 selection:text-white p-4 sm:p-6 lg:p-8" onclick="handleGlobalClick(event)">
+
+  <!-- HEADER & ACCIONES -->
+  <header class="max-w-7xl mx-auto mb-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+      
+      <!-- Brand & Titulo -->
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-400 text-white flex items-center justify-center font-bold text-2xl shadow-lg shadow-amber-500/20">
+            🚦
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">
+                Farol de Documentación por Chofer
+              </h1>
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200">
+                Argos Ambev
+              </span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
+                Fadel Transportes PY
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              Monitoreo del <strong>último documento cargado</strong> por tipo &bull; Choferes activos con alertas de vencimiento y aprobación.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Connection Pill & Actions -->
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Status Pill -->
+        <div id="bridgeStatusPill" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold">
+          <span id="bridgeDot" class="w-2 h-2 rounded-full bg-slate-400"></span>
+          <span id="bridgeStatusText">Conectando con puente...</span>
+        </div>
+
+        <!-- Sync Button -->
+        <button onclick="syncArgosDirect()" id="btnSync" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition flex items-center gap-2">
+          <svg id="syncIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span id="syncBtnText">Sincronizar en Vivo con Argos</span>
+        </button>
+
+        <!-- Export Button -->
+        <button onclick="exportToCSV()" class="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-xs shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Exportar Excel (CSV)
+        </button>
+      </div>
+    </div>
+
+    <!-- TARJETAS SUPERIORES (KPIS CALCULADOS SOBRE EL ÚLTIMO DOCUMENTO DE CADA TIPO) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 mt-6">
+      <!-- Choferes -->
+      <div onclick="setFilter('all')" class="cursor-pointer saas-card p-4 hover:border-blue-400 transition">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Choferes Activos</span>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1" id="kpi-drivers">0</div>
+        <span class="text-[10px] text-slate-400">Operativos en Fadel</span>
+      </div>
+
+      <!-- Documentos Únicos Actuales -->
+      <div onclick="setFilter('all')" class="cursor-pointer saas-card p-4 hover:border-blue-400 transition">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Docs Activos</span>
+        <div class="text-2xl font-extrabold text-slate-900 mt-1" id="kpi-docs">0</div>
+        <span class="text-[10px] text-slate-400">Últimos por tipo</span>
+      </div>
+
+      <!-- VENCIDOS (ROJO) -->
+      <div onclick="setFilter('vencido')" class="cursor-pointer saas-card p-4 border-red-200 bg-red-50/40 hover:bg-red-50/90 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-red-600">🔴 Vencidos</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 farol-pulse-red"></span>
+        </div>
+        <div class="text-2xl font-extrabold text-red-600 mt-1" id="kpi-vencidos">0</div>
+        <span class="text-[10px] text-red-500 font-semibold">Requiere renovación</span>
+      </div>
+
+      <!-- CRITICOS (≤ 15 DÍAS) -->
+      <div onclick="setFilter('urgente')" class="cursor-pointer saas-card p-4 border-orange-200 bg-orange-50/40 hover:bg-orange-50/90 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-orange-600">🟠 &le; 15 Días</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+        </div>
+        <div class="text-2xl font-extrabold text-orange-600 mt-1" id="kpi-urgentes">0</div>
+        <span class="text-[10px] text-orange-500 font-semibold">Vencen en quincena</span>
+      </div>
+
+      <!-- ALERTA (16-30 DÍAS) -->
+      <div onclick="setFilter('alerta')" class="cursor-pointer saas-card p-4 border-yellow-200 bg-yellow-50/40 hover:bg-yellow-50/90 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-yellow-600">🟡 16-30 Días</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+        </div>
+        <div class="text-2xl font-extrabold text-yellow-600 mt-1" id="kpi-alerta">0</div>
+        <span class="text-[10px] text-yellow-600 font-semibold">Planificar recarga</span>
+      </div>
+
+      <!-- VIGENTES (VERDE) -->
+      <div onclick="setFilter('vigente')" class="cursor-pointer saas-card p-4 border-emerald-200 bg-emerald-50/40 hover:bg-emerald-50/90 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">🟢 Vigentes</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        </div>
+        <div class="text-2xl font-extrabold text-emerald-600 mt-1" id="kpi-vigentes">0</div>
+        <span class="text-[10px] text-emerald-600 font-semibold">&gt; 30 días validez</span>
+      </div>
+
+      <!-- NUEVA TARJETA: PENDIENTE APROBACIÓN (PÚRPURA) -->
+      <div onclick="setFilter('pending_approval')" class="cursor-pointer saas-card p-4 border-purple-200 bg-purple-50/40 hover:bg-purple-50/90 transition">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-purple-700">🟣 Pend. Aprobación</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+        </div>
+        <div class="text-2xl font-extrabold text-purple-700 mt-1" id="kpi-pending-approval">0</div>
+        <span class="text-[10px] text-purple-600 font-semibold">Firma pendiente Argos</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTROLS & FILTER BAR -->
+  <section class="max-w-7xl mx-auto mb-6 flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
+    
+    <!-- Left Controls: Search Bar & Multi-Select Dropdown -->
+    <div class="flex flex-col sm:flex-row gap-2.5 flex-1 max-w-2xl">
+      <!-- Search Input -->
+      <div class="relative flex-1">
+        <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Buscar por chofer, CI/Documento o tipo de documento..." 
+               class="w-full pl-10 pr-4 py-2 text-xs font-medium bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 shadow-sm">
+      </div>
+
+      <!-- FILTRO MULTIPLE DE TIPO DE DOCUMENTO -->
+      <div class="relative" id="docTypeDropdownWrapper">
+        <button onclick="toggleDocTypeDropdown(event)" id="btnDocTypeDropdown" class="w-full sm:w-auto px-3.5 py-2 text-xs font-semibold rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 shadow-sm transition flex items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 truncate">
+            <svg class="w-4 h-4 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+            <span id="docTypeDropdownLabel">Tipos de Doc: Todos</span>
+          </div>
+          <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+
+        <!-- Dropdown Menu Flotante -->
+        <div id="docTypeMenu" class="hidden absolute left-0 mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-2xl z-50 p-3">
+          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+            <span class="text-xs font-bold text-slate-900">Filtrar por Tipos de Doc</span>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button onclick="applyPresetDocTypes()" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold px-1.5 py-0.5 rounded bg-blue-50">7 Clave</button>
+              <span class="text-slate-300">|</span>
+              <button onclick="selectAllDocTypes(true)" class="text-[11px] text-slate-600 hover:text-slate-800 font-medium">Todos</button>
+              <span class="text-slate-300">|</span>
+              <button onclick="selectAllDocTypes(false)" class="text-[11px] text-slate-500 hover:text-slate-700 font-medium">Ninguno</button>
+            </div>
+          </div>
+
+          <!-- Buscador interno de tipos -->
+          <input type="text" id="docTypeSearchInput" oninput="filterDocTypeList()" placeholder="Buscar tipo (ej. Licencia, ASO, EPP)..." 
+                 class="w-full mb-2 px-2.5 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-800 focus:outline-none focus:border-blue-500">
+
+          <!-- Lista scrollable con checkboxes -->
+          <div id="docTypeListContainer" class="max-h-60 overflow-y-auto space-y-1 text-xs pr-1">
+            <!-- Se llena dinámicamente con los tipos reales -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Controls: Status Pills & View Mode -->
+    <div class="flex flex-wrap items-center gap-2">
+      <!-- Status Pills (Incluyendo Pendiente de Aprobación) -->
+      <div class="inline-flex rounded-xl border border-slate-200 bg-white p-1 text-xs font-semibold shadow-sm flex-wrap">
+        <button onclick="setFilter('all')" id="btn-filter-all" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-sm transition">Todos</button>
+        <button onclick="setFilter('vencido')" id="btn-filter-vencido" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-red-600 transition">🔴 Vencidos</button>
+        <button onclick="setFilter('urgente')" id="btn-filter-urgente" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-orange-600 transition">🟠 &le; 15d</button>
+        <button onclick="setFilter('alerta')" id="btn-filter-alerta" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-yellow-600 transition">🟡 16-30d</button>
+        <button onclick="setFilter('vigente')" id="btn-filter-vigente" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-emerald-600 transition">🟢 Vigentes</button>
+        <button onclick="setFilter('pending_approval')" id="btn-filter-pending_approval" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-purple-600 transition">🟣 Pend. Aprobación</button>
+      </div>
+
+      <!-- View Switcher -->
+      <div class="inline-flex rounded-xl border border-slate-200 bg-white p-1 text-xs font-semibold shadow-sm">
+        <button onclick="setViewMode('driver')" id="btn-view-driver" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-900 shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          Vista Chofer
+        </button>
+        <button onclick="setViewMode('table')" id="btn-view-table" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Tabla Plana
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER (DYNAMIC VIEWS) -->
+  <main id="contentContainer" class="max-w-7xl mx-auto space-y-4">
+    <!-- Se llena dinámicamente con los últimos documentos reales -->
+  </main>
+
+  <script src="argos-data.js"></script>
+  <script>
+    const BRIDGE_URL = "http://localhost:3015";
+    const TODAY = new Date("2026-11-06T00:00:00");
+
+    let documentsData = [];
+    let currentFilter = 'all'; // all, vencido, urgente, alerta, vigente, pending_approval
+    let viewMode = 'driver';
+    
+    // Conjunto de tipos de documento seleccionados para el filtro múltiple
+    let allAvailableDocTypes = [];
+    let selectedDocTypes = new Set();
+
+    // CALCULO DEL FAROL (SEMÁFORO)
+    function calculateFarol(expDateStr, status) {
+      if (status === 'Expired') {
+        const days = expDateStr ? Math.ceil((new Date(expDateStr + "T00:00:00") - TODAY) / (1000 * 60 * 60 * 24)) : null;
+        return {
+          status: 'vencido',
+          label: days !== null ? `Vencido hace ${Math.abs(days)}d` : 'Vencido',
+          days: days,
+          badgeClass: 'badge-vencido',
+          dotClass: 'bg-red-500 farol-pulse-red'
+        };
+      }
+
+      if (!expDateStr) return { status: 'sin_fecha', label: 'Sin Vencimiento', days: null, badgeClass: 'bg-slate-100 text-slate-500 border border-slate-200', dotClass: 'bg-slate-400' };
+      
+      const expDate = new Date(expDateStr + "T00:00:00");
+      const diffTime = expDate - TODAY;
+      const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (days < 0) {
+        return {
+          status: 'vencido',
+          label: `Vencido hace ${Math.abs(days)}d`,
+          days: days,
+          badgeClass: 'badge-vencido',
+          dotClass: 'bg-red-500 farol-pulse-red'
+        };
+      } else if (days <= 15) {
+        return {
+          status: 'urgente',
+          label: `Vence en ${days}d`,
+          days: days,
+          badgeClass: 'badge-urgente',
+          dotClass: 'bg-orange-500'
+        };
+      } else if (days <= 30) {
+        return {
+          status: 'alerta',
+          label: `Vence en ${days}d`,
+          days: days,
+          badgeClass: 'badge-alerta',
+          dotClass: 'bg-yellow-500'
+        };
+      } else {
+        return {
+          status: 'vigente',
+          label: `Vigente (${days}d)`,
+          days: days,
+          badgeClass: 'badge-vigente',
+          dotClass: 'bg-emerald-500'
+        };
+      }
+    }
+
+    // 7 TIPOS DE DOCUMENTOS PREDETERMINADOS (INDICADOS POR EL USUARIO)
+    const DEFAULT_PRESET_PATTERNS = [
+      /c[eé]dula de identidad/i,
+      /pago p[oó]liza contra accidentes/i,
+      /antecedentes policiales/i,
+      /inducci[oó]n ingreso al sector log[ií]stica/i,
+      /inducci[oó]n ingreso a la unidad/i,
+      /evaluaci[oó]n manejo defensivo/i,
+      /licencia de conducir/i
+    ];
+
+    function isDefaultDocType(typeName) {
+      if (!typeName) return false;
+      return DEFAULT_PRESET_PATTERNS.some(pat => pat.test(typeName));
+    }
+
+    // INICIALIZAR Y POBLAR DROPDOWN DE TIPOS DE DOCUMENTOS
+    function initDocTypesCatalog() {
+      const typeCounts = {};
+      documentsData.forEach(d => {
+        if (d.employeeStatus && d.employeeStatus !== 'Active') return;
+        const tp = d.docType || 'Documento General';
+        typeCounts[tp] = (typeCounts[tp] || 0) + 1;
+      });
+
+      allAvailableDocTypes = Object.keys(typeCounts).sort();
+
+      // FILTRO PREDETERMINADO: Activar por defecto ÚNICAMENTE los 7 tipos clave
+      if (selectedDocTypes.size === 0) {
+        const defaults = allAvailableDocTypes.filter(isDefaultDocType);
+        if (defaults.length > 0) {
+          selectedDocTypes = new Set(defaults);
+        } else {
+          selectedDocTypes = new Set(allAvailableDocTypes);
+        }
+      }
+
+      renderDocTypeCheckboxes();
+      updateDocTypeDropdownLabel();
+    }
+
+    function applyPresetDocTypes() {
+      const defaults = allAvailableDocTypes.filter(isDefaultDocType);
+      selectedDocTypes = new Set(defaults);
+      renderDocTypeCheckboxes(document.getElementById('docTypeSearchInput').value);
+      updateDocTypeDropdownLabel();
+      applyFilters();
+    }
+
+    function renderDocTypeCheckboxes(filterText = '') {
+      const container = document.getElementById('docTypeListContainer');
+      const q = filterText.toLowerCase().trim();
+
+      const filteredTypes = allAvailableDocTypes.filter(tp => !q || tp.toLowerCase().includes(q));
+
+      if (filteredTypes.length === 0) {
+        container.innerHTML = `<div class="p-3 text-center text-slate-400 text-xs">No hay tipos que coincidan</div>`;
+        return;
+      }
+
+      let html = '';
+      filteredTypes.forEach(tp => {
+        const isChecked = selectedDocTypes.has(tp) ? 'checked' : '';
+        html += `
+          <label class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded-lg cursor-pointer transition select-none">
+            <input type="checkbox" value="${encodeURIComponent(tp)}" ${isChecked} onchange="handleDocTypeCheckboxChange(this)"
+                   class="rounded text-blue-600 focus:ring-blue-500 border-slate-300 w-3.5 h-3.5 cursor-pointer">
+            <span class="flex-1 font-medium text-slate-700 truncate" title="${tp}">${tp}</span>
+          </label>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterDocTypeList() {
+      const val = document.getElementById('docTypeSearchInput').value;
+      renderDocTypeCheckboxes(val);
+    }
+
+    function handleDocTypeCheckboxChange(cb) {
+      const tp = decodeURIComponent(cb.value);
+      if (cb.checked) {
+        selectedDocTypes.add(tp);
+      } else {
+        selectedDocTypes.delete(tp);
+      }
+      updateDocTypeDropdownLabel();
+      applyFilters();
+    }
+
+    function selectAllDocTypes(select) {
+      if (select) {
+        selectedDocTypes = new Set(allAvailableDocTypes);
+      } else {
+        selectedDocTypes = new Set();
+      }
+      renderDocTypeCheckboxes(document.getElementById('docTypeSearchInput').value);
+      updateDocTypeDropdownLabel();
+      applyFilters();
+    }
+
+    function updateDocTypeDropdownLabel() {
+      const lbl = document.getElementById('docTypeDropdownLabel');
+      const defaultsCount = allAvailableDocTypes.filter(isDefaultDocType).length;
+      const isPreset = selectedDocTypes.size > 0 && 
+                       selectedDocTypes.size === defaultsCount && 
+                       Array.from(selectedDocTypes).every(isDefaultDocType);
+
+      if (isPreset) {
+        lbl.textContent = `Tipos de Doc: 7 Predeterminados`;
+      } else if (selectedDocTypes.size === allAvailableDocTypes.length) {
+        lbl.textContent = `Tipos de Doc: Todos (${allAvailableDocTypes.length})`;
+      } else if (selectedDocTypes.size === 0) {
+        lbl.textContent = `Tipos de Doc: Ninguno`;
+      } else {
+        lbl.textContent = `Tipos de Doc (${selectedDocTypes.size} de ${allAvailableDocTypes.length})`;
+      }
+    }
+
+    function toggleDocTypeDropdown(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('docTypeMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function handleGlobalClick(e) {
+      const wrapper = document.getElementById('docTypeDropdownWrapper');
+      const menu = document.getElementById('docTypeMenu');
+      if (wrapper && !wrapper.contains(e.target) && menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+      }
+    }
+
+    // EXTRAER EXCLUSIVAMENTE EL ÚLTIMO DOCUMENTO POR CADA TIPO PARA CADA CHOFER ACTIVO
+    function getProcessedModel() {
+      const driverMap = {};
+
+      documentsData.forEach(item => {
+        // FILTRO ESTRICTO 1: Descartar choferes inactivos
+        if (item.employeeStatus && item.employeeStatus !== 'Active') return;
+
+        // FILTRO ESTRICTO 2: Filtro múltiple de tipos de documentos seleccionados
+        if (selectedDocTypes.size > 0 && !selectedDocTypes.has(item.docType)) return;
+
+        if (!driverMap[item.driver]) {
+          driverMap[item.driver] = {
+            name: item.driver,
+            cpf: item.cpf || 'N/D',
+            carrier: item.carrier || 'Fadel Transportes PY',
+            unit: item.unit || '',
+            documentsByType: {}
+          };
+        }
+
+        if (!driverMap[item.driver].documentsByType[item.docType]) {
+          driverMap[item.driver].documentsByType[item.docType] = [];
+        }
+
+        driverMap[item.driver].documentsByType[item.docType].push(item);
+      });
+
+      const allActiveDocs = [];
+      const driversList = [];
+
+      Object.values(driverMap).forEach(driver => {
+        const activeDocs = [];
+
+        // Por cada tipo de documento seleccionado, tomar SOLO el último documento CARGADO
+        Object.keys(driver.documentsByType).forEach(type => {
+          const list = driver.documentsByType[type];
+
+          // REGLA CLAVE: Separar documentos efectivamente cargados (Approved, PendingApproval, Expired, Rejected)
+          // de los requerimientos vacíos generados automáticamente por el sistema (PendingShipping / Nueva solicitud)
+          const loadedDocs = list.filter(d => d.status !== 'PendingShipping');
+
+          // Si existen documentos cargados, se toma exclusivamente entre ellos.
+          // Solo si el tipo NUNCA ha tenido carga previa se muestra el placeholder PendingShipping.
+          const candidateList = loadedDocs.length > 0 ? loadedDocs : list;
+
+          candidateList.sort((a, b) => {
+            const dateA = new Date(a.uploadDate || '1970-01-01');
+            const dateB = new Date(b.uploadDate || '1970-01-01');
+            if (dateB - dateA !== 0) return dateB - dateA;
+            const expA = new Date(a.expDate || '1970-01-01');
+            const expB = new Date(b.expDate || '1970-01-01');
+            if (expB - expA !== 0) return expB - expA;
+            const statusPriority = { Approved: 4, PendingApproval: 3, Expired: 2, Rejected: 1, PendingShipping: 0 };
+            return (statusPriority[b.status] || 0) - (statusPriority[a.status] || 0);
+          });
+
+          // EL ÚLTIMO DOCUMENTO CARGADO
+          const chosen = candidateList[0];
+          const farol = calculateFarol(chosen.expDate, chosen.status);
+          const latestDoc = { ...chosen, farol };
+
+          activeDocs.push(latestDoc);
+          allActiveDocs.push({
+            ...latestDoc,
+            driverName: driver.name,
+            cpf: driver.cpf,
+            carrier: driver.carrier,
+            unit: driver.unit
+          });
+        });
+
+        // Ordenar los documentos del chofer por criticidad del farol
+        const statusWeight = { vencido: 4, urgente: 3, alerta: 2, vigente: 1, sin_fecha: 0 };
+        activeDocs.sort((a, b) => (statusWeight[b.farol.status] || 0) - (statusWeight[a.farol.status] || 0));
+
+        // Determinar el semáforo global del chofer evaluando SOLO sus últimos documentos
+        let worst = 'vigente';
+        if (activeDocs.some(d => d.farol.status === 'vencido')) worst = 'vencido';
+        else if (activeDocs.some(d => d.farol.status === 'urgente')) worst = 'urgente';
+        else if (activeDocs.some(d => d.farol.status === 'alerta')) worst = 'alerta';
+
+        driversList.push({
+          ...driver,
+          activeDocs,
+          worstStatus: worst
+        });
+      });
+
+      // Ordenar choferes: los que tienen documentos vencidos arriba
+      const weights = { vencido: 4, urgente: 3, alerta: 2, vigente: 1 };
+      driversList.sort((a, b) => weights[b.worstStatus] - weights[a.worstStatus]);
+
+      return { driversList, allActiveDocs };
+    }
+
+    // ACTUALIZAR CONTADORES SUPERIORES CON BASE EN LOS ÚLTIMOS DOCUMENTOS
+    function updateKPIs(allActiveDocs, driversList) {
+      document.getElementById('kpi-drivers').textContent = driversList.length;
+      document.getElementById('kpi-docs').textContent = allActiveDocs.length;
+
+      let vencidos = 0, urgentes = 0, alertas = 0, vigentes = 0, pendingApproval = 0;
+      allActiveDocs.forEach(d => {
+        if (d.farol.status === 'vencido') vencidos++;
+        else if (d.farol.status === 'urgente') urgentes++;
+        else if (d.farol.status === 'alerta') alertas++;
+        else if (d.farol.status === 'vigente') vigentes++;
+
+        if (d.status === 'PendingApproval') {
+          pendingApproval++;
+        }
+      });
+
+      document.getElementById('kpi-vencidos').textContent = vencidos;
+      document.getElementById('kpi-urgentes').textContent = urgentes;
+      document.getElementById('kpi-alerta').textContent = alertas;
+      document.getElementById('kpi-vigentes').textContent = vigentes;
+      document.getElementById('kpi-pending-approval').textContent = pendingApproval;
+    }
+
+    // RENDERIZAR VISTA CHOFER (SOLO ÚLTIMOS DOCUMENTOS POR TIPO)
+    function renderDriverView(filteredDrivers) {
+      const container = document.getElementById('contentContainer');
+      if (filteredDrivers.length === 0) {
+        if (documentsData.length === 0) {
+          container.innerHTML = `
+            <div class="saas-card p-12 text-center text-slate-500">
+              <div class="text-4xl mb-3">⚡</div>
+              <p class="font-bold text-base text-slate-800">Conectando con Argos Ambev</p>
+              <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">
+                Haz clic en el botón superior <strong>"Sincronizar en Vivo con Argos"</strong> para cargar los datos en tiempo real.
+              </p>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div class="saas-card p-12 text-center text-slate-400">
+              <div class="text-3xl mb-2">🔍</div>
+              <p class="font-bold text-slate-700">No hay choferes para los filtros seleccionados</p>
+              <p class="text-xs mt-1">Prueba seleccionando 'Todos', ajustando los tipos de documento o limpiando el buscador.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      let html = '';
+      filteredDrivers.forEach(driver => {
+        let statusBadge = '';
+        if (driver.worstStatus === 'vencido') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold badge-vencido flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500 farol-pulse-red"></span> Vencido</span>`;
+        } else if (driver.worstStatus === 'urgente') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold badge-urgente flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-orange-500"></span> Urgente (&le;15d)</span>`;
+        } else if (driver.worstStatus === 'alerta') {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold badge-alerta flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-yellow-500"></span> Alerta (&le;30d)</span>`;
+        } else {
+          statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold badge-vigente flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Vigente</span>`;
+        }
+
+        html += `
+          <div class="saas-card overflow-hidden transition hover:border-slate-300">
+            <!-- Header Chofer -->
+            <div class="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/60">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 font-extrabold flex items-center justify-center border border-blue-200 text-sm">
+                  ${driver.name.split(' ').map(n=>n[0]).slice(0,2).join('')}
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-base text-slate-900">${driver.name}</h3>
+                  <div class="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+                    <span>CI / Doc: <strong class="text-slate-800 font-mono">${driver.cpf}</strong></span>
+                    ${driver.unit ? `<span>&bull;</span> <span>${driver.unit}</span>` : ''}
+                    <span>&bull;</span>
+                    <span>${driver.carrier}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5">
+                ${statusBadge}
+                <span class="text-xs text-slate-600 bg-white border border-slate-200 px-2.5 py-1 rounded-xl font-semibold">
+                  ${driver.displayDocs.length} ${driver.displayDocs.length === 1 ? 'documento' : 'documentos'}
+                </span>
+              </div>
+            </div>
+
+            <!-- Tabla de Documentos: ÚNICA Y EXCLUSIVAMENTE EL ÚLTIMO CARGADO POR TIPO -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-100">
+                  <tr>
+                    <th class="py-2.5 px-4">Tipo de Documento</th>
+                    <th class="py-2.5 px-4">Última Fecha de Carga</th>
+                    <th class="py-2.5 px-4">Fecha Vencimiento</th>
+                    <th class="py-2.5 px-4 text-center">Farol de Vencimiento</th>
+                    <th class="py-2.5 px-4 text-right">Estado en Argos</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+        `;
+
+        driver.displayDocs.forEach(doc => {
+          let statusBadgeClass = "bg-slate-100 text-slate-600";
+          let statusLabel = doc.status || "Registrado";
+
+          if (doc.status === "Approved") {
+            statusBadgeClass = "bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold";
+            statusLabel = "Aprobado";
+          } else if (doc.status === "PendingApproval") {
+            statusBadgeClass = "bg-purple-50 text-purple-700 border border-purple-200 font-bold";
+            statusLabel = "Pendiente Aprobación";
+          } else if (doc.status === "PendingShipping") {
+            statusBadgeClass = "bg-slate-100 text-slate-600 border border-slate-200";
+            statusLabel = "Pendiente Envío";
+          } else if (doc.status === "Expired") {
+            statusBadgeClass = "bg-rose-50 text-rose-700 border border-rose-200 font-bold";
+            statusLabel = "Vencido";
+          } else if (doc.status === "Rejected") {
+            statusBadgeClass = "bg-red-50 text-red-700 border border-red-200 font-bold";
+            statusLabel = "Rechazado";
+          }
+
+          html += `
+            <tr class="hover:bg-slate-50/70 transition">
+              <td class="py-3 px-4 font-bold text-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm">📄</span>
+                  <span>${doc.docType}</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 font-mono text-slate-700">
+                ${doc.uploadDate || 'N/D'}
+                <span class="text-[10px] text-slate-400 block font-sans">Última carga</span>
+              </td>
+              <td class="py-3 px-4 font-mono font-bold text-slate-900">
+                ${doc.expDate || 'Sin vencimiento'}
+              </td>
+              <td class="py-3 px-4 text-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${doc.farol.badgeClass}">
+                  <span class="w-2 h-2 rounded-full ${doc.farol.dotClass}"></span>
+                  ${doc.farol.label}
+                </span>
+              </td>
+              <td class="py-3 px-4 text-right">
+                <span class="text-xs px-2.5 py-1 rounded-lg ${statusBadgeClass}">
+                  ${statusLabel}
+                </span>
+              </td>
+            </tr>
+          `;
+        });
+
+        html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // RENDERIZAR TABLA PLANA
+    function renderTableView(filteredDrivers) {
+      const container = document.getElementById('contentContainer');
+      const allDocs = [];
+      filteredDrivers.forEach(d => {
+        d.displayDocs.forEach(doc => {
+          allDocs.push({ ...doc, driverName: d.name, cpf: d.cpf, carrier: d.carrier });
+        });
+      });
+
+      if (allDocs.length === 0) {
+        container.innerHTML = `
+          <div class="saas-card p-12 text-center text-slate-400">
+            <p class="font-bold text-slate-700">No hay documentos para mostrar</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `
+        <div class="saas-card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-medium">
+              <thead class="bg-slate-50 text-slate-400 uppercase text-[10px] font-bold border-b border-slate-100">
+                <tr>
+                  <th class="py-3 px-4">Chofer</th>
+                  <th class="py-3 px-4">CI / Doc</th>
+                  <th class="py-3 px-4">Tipo de Documento</th>
+                  <th class="py-3 px-4">Última Fecha Carga</th>
+                  <th class="py-3 px-4">Fecha Vencimiento</th>
+                  <th class="py-3 px-4 text-center">Farol</th>
+                  <th class="py-3 px-4 text-right">Estado Argos</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+      `;
+
+      allDocs.forEach(doc => {
+        let statusBadgeClass = "bg-slate-100 text-slate-600";
+        let statusLabel = doc.status || "Registrado";
+
+        if (doc.status === "Approved") {
+          statusBadgeClass = "bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold";
+          statusLabel = "Aprobado";
+        } else if (doc.status === "PendingApproval") {
+          statusBadgeClass = "bg-purple-50 text-purple-700 border border-purple-200 font-bold";
+          statusLabel = "Pendiente Aprobación";
+        } else if (doc.status === "PendingShipping") {
+          statusBadgeClass = "bg-slate-100 text-slate-600 border border-slate-200";
+          statusLabel = "Pendiente Envío";
+        } else if (doc.status === "Expired") {
+          statusBadgeClass = "bg-rose-50 text-rose-700 border border-rose-200 font-bold";
+          statusLabel = "Vencido";
+        } else if (doc.status === "Rejected") {
+          statusBadgeClass = "bg-red-50 text-red-700 border border-red-200 font-bold";
+          statusLabel = "Rechazado";
+        }
+
+        html += `
+          <tr class="hover:bg-slate-50/70 transition">
+            <td class="py-3 px-4 font-bold text-slate-900">${doc.driverName}</td>
+            <td class="py-3 px-4 font-mono text-slate-500">${doc.cpf}</td>
+            <td class="py-3 px-4 text-slate-800 font-semibold">${doc.docType}</td>
+            <td class="py-3 px-4 font-mono text-slate-600">${doc.uploadDate}</td>
+            <td class="py-3 px-4 font-mono font-bold text-slate-900">${doc.expDate}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${doc.farol.badgeClass}">
+                <span class="w-2 h-2 rounded-full ${doc.farol.dotClass}"></span>
+                ${doc.farol.label}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-right">
+              <span class="text-xs px-2 py-0.5 rounded ${statusBadgeClass}">
+                ${statusLabel}
+              </span>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    // APLICAR FILTROS Y BÚSQUEDA
+    function applyFilters() {
+      const { driversList, allActiveDocs } = getProcessedModel();
+      updateKPIs(allActiveDocs, driversList);
+
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      const filtered = [];
+      driversList.forEach(driver => {
+        const matchingDocs = driver.activeDocs.filter(doc => {
+          let matchFilter = false;
+          if (currentFilter === 'all') {
+            matchFilter = true;
+          } else if (currentFilter === 'pending_approval') {
+            matchFilter = (doc.status === 'PendingApproval');
+          } else {
+            matchFilter = (doc.farol.status === currentFilter);
+          }
+
+          const matchSearch = !q ||
+            driver.name.toLowerCase().includes(q) ||
+            driver.cpf.toLowerCase().includes(q) ||
+            doc.docType.toLowerCase().includes(q) ||
+            driver.unit.toLowerCase().includes(q);
+
+          return matchFilter && matchSearch;
+        });
+
+        if (matchingDocs.length > 0) {
+          filtered.push({
+            ...driver,
+            displayDocs: matchingDocs
+          });
+        }
+      });
+
+      if (viewMode === 'driver') {
+        renderDriverView(filtered);
+      } else {
+        renderTableView(filtered);
+      }
+    }
+
+    function setFilter(status) {
+      currentFilter = status;
+      ['all', 'vencido', 'urgente', 'alerta', 'vigente', 'pending_approval'].forEach(st => {
+        const btn = document.getElementById('btn-filter-' + st);
+        if (btn) {
+          if (st === status) {
+            btn.className = "px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-sm transition";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+          }
+        }
+      });
+      applyFilters();
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      const btnDriver = document.getElementById('btn-view-driver');
+      const btnTable = document.getElementById('btn-view-table');
+
+      if (mode === 'driver') {
+        btnDriver.className = "px-3 py-1.5 rounded-lg bg-slate-100 text-slate-900 shadow-sm transition flex items-center gap-1.5";
+        btnTable.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5";
+      } else {
+        btnTable.className = "px-3 py-1.5 rounded-lg bg-slate-100 text-slate-900 shadow-sm transition flex items-center gap-1.5";
+        btnDriver.className = "px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5";
+      }
+      applyFilters();
+    }
+
+    // SINCRONIZACIÓN EN VIVO CON ARGOS
+    async function syncArgosDirect() {
+      const btn = document.getElementById('btnSync');
+      const txt = document.getElementById('syncBtnText');
+      const icon = document.getElementById('syncIcon');
+
+      btn.disabled = true;
+      icon.classList.add('animate-spin');
+      txt.textContent = "Extrayendo documentos en vivo...";
+
+      try {
+        const res = await fetch(`${BRIDGE_URL}/api/argos/sync`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario: "anika.solis@fadeltransportes.com.br", senha: "Anikafadel@358" })
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || `Error HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        if (data.documents && data.documents.length > 0) {
+          documentsData = data.documents;
+          localStorage.setItem('argos_real_documents', JSON.stringify(documentsData));
+          initDocTypesCatalog();
+          applyFilters();
+          alert(`¡Extracción completada!\n\nSe obtuvieron ${data.documents.length} documentos correspondientes a los choferes activos de Fadel Transportes.`);
+        }
+      } catch (err) {
+        alert(`Error al sincronizar con Argos: ${err.message}\n\nAsegúrate de que 'Iniciar-Argos.bat' esté corriendo.`);
+      } finally {
+        btn.disabled = false;
+        icon.classList.remove('animate-spin');
+        txt.textContent = "Sincronizar en Vivo con Argos";
+      }
+    }
+
+    // VERIFICAR ESTADO DEL PUENTE Y CARGAR DATOS
+    async function checkBridgeStatus() {
+      const pill = document.getElementById('bridgeStatusPill');
+      const dot = document.getElementById('bridgeDot');
+      const text = document.getElementById('bridgeStatusText');
+
+      let bridgeOnline = false;
+
+      // 1. Intentar conectar al puente local en vivo (timeout de 2 segundos)
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        const res = await fetch(`${BRIDGE_URL}/api/status`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+          const data = await res.json();
+          bridgeOnline = true;
+          pill.className = "flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold shadow-sm";
+          dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+          text.textContent = `Puente Activo (Puerto ${data.port}) · Argos Conectado`;
+
+          // Cargar datos reales desde el puente
+          const cacheRes = await fetch(`${BRIDGE_URL}/api/argos/cache`);
+          if (cacheRes.ok) {
+            const cacheData = await cacheRes.json();
+            if (cacheData.documents && cacheData.documents.length > 0) {
+              documentsData = cacheData.documents;
+              localStorage.setItem('argos_real_documents', JSON.stringify(documentsData));
+              initDocTypesCatalog();
+              applyFilters();
+              return;
+            }
+          }
+        }
+      } catch (e) {
+        bridgeOnline = false;
+      }
+
+      // 2. Si no hay puente local (modo web o GitHub Pages), cargar 'argos-cache.json' estático
+      try {
+        const staticRes = await fetch('./argos-cache.json');
+        if (staticRes.ok) {
+          const staticData = await staticRes.json();
+          if (Array.isArray(staticData) && staticData.length > 0) {
+            documentsData = staticData;
+            localStorage.setItem('argos_real_documents', JSON.stringify(documentsData));
+            pill.className = "flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold shadow-sm";
+            dot.className = "w-2 h-2 rounded-full bg-blue-500";
+            text.textContent = "Modo Nube (Datos Reales de Argos Sincronizados)";
+            initDocTypesCatalog();
+            applyFilters();
+            return;
+          }
+        }
+      } catch (err) {}
+
+      // 3. Fallback a localStorage
+      pill.className = "flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-semibold shadow-sm";
+      dot.className = "w-2 h-2 rounded-full bg-amber-500";
+      text.textContent = "Inicia 'Iniciar-Argos.bat' para sincronizar";
+
+      const saved = localStorage.getItem('argos_real_documents');
+      if (saved) {
+        try { documentsData = JSON.parse(saved); } catch { documentsData = []; }
+      } else {
+        documentsData = [];
+      }
+      initDocTypesCatalog();
+      applyFilters();
+    }
+
+    // EXPORTAR A EXCEL (SOLO ÚLTIMOS DOCUMENTOS FILTRADOS)
+    function exportToCSV() {
+      const { allActiveDocs } = getProcessedModel();
+      if (allActiveDocs.length === 0) {
+        alert("No hay datos para exportar.");
+        return;
+      }
+
+      let csv = "\uFEFF";
+      csv += "Chofer;CI/Doc;Transportadora;Unidad;Tipo de Documento;Ultima Fecha Carga;Fecha Vencimiento;Dias Restantes;Estado Farol;Estado Argos\n";
+
+      allActiveDocs.forEach(d => {
+        csv += `"${d.driverName}";"${d.cpf}";"${d.carrier}";"${d.unit}";"${d.docType}";"${d.uploadDate}";"${d.expDate}";"${d.farol.days !== null ? d.farol.days : ''}";"${d.farol.label}";"${d.status}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `Farol_Choferes_Argos_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.ARGOS_INITIAL_DATA && Array.isArray(window.ARGOS_INITIAL_DATA) && window.ARGOS_INITIAL_DATA.length > 0) {
+        documentsData = window.ARGOS_INITIAL_DATA;
+        initDocTypesCatalog();
+        applyFilters();
+      }
+      checkBridgeStatus();
+    });
+  </script>
+</body>
+</html>
