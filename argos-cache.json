@@ -14665,9 +14665,9 @@
         "employeeId":  "466453cb-95a2-495f-84a9-1d82d1550046",
         "employeeStatus":  "Active",
         "driver":  "Sergio Ramon Manotti Barreto",
-        "uploadDate":  "2026-11-01",
+        "uploadDate":  "2026-11-07",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingShipping",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -18403,9 +18403,9 @@
         "employeeId":  "466453cb-95a2-495f-84a9-1d82d1550046",
         "employeeStatus":  "Active",
         "driver":  "Sergio Ramon Manotti Barreto",
-        "uploadDate":  "2026-11-05",
+        "uploadDate":  "2026-11-07",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "PendingShipping",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -20951,9 +20951,9 @@
         "employeeId":  "b376144f-47d2-4a56-add6-4335fee9cba0",
         "employeeStatus":  "Active",
         "driver":  "Celso Lopez De Vaca",
-        "uploadDate":  "2026-10-28",
+        "uploadDate":  "2026-11-07",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingShipping",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -24143,9 +24143,9 @@
         "employeeId":  "4a3a1152-af51-49ec-81f3-640d0ba46896",
         "employeeStatus":  "Active",
         "driver":  "Edgar Ramón Ibarra Servin",
-        "uploadDate":  "2026-11-05",
+        "uploadDate":  "2026-11-07",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingShipping",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -26415,20 +26415,6 @@
         "docType":  "Inducción Ingreso a la Unidad",
         "status":  "Expired",
         "isExpired":  true,
-        "unit":  "Cervecería Ypane"
-    },
-    {
-        "expDate":  "",
-        "carrier":  "FADEL TRANSPORTES PY",
-        "id":  "b3c47e1a-890d-4a59-b5a3-2259395f3c0f",
-        "cpf":  "4182936",
-        "employeeId":  "4a332660-8d28-484a-baaa-d120f6ed1c06",
-        "employeeStatus":  "Active",
-        "driver":  "Mario Federico Torres Caballero",
-        "uploadDate":  "2024-08-16",
-        "docType":  "Capacitación Riesgos Específicos",
-        "status":  "PendingShipping",
-        "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
     {
@@ -30863,9 +30849,9 @@
         "employeeId":  "4cda4c9d-eb80-4cfd-859c-671a5cbf074d",
         "employeeStatus":  "Active",
         "driver":  "Liz Miguela Benitez Adorno",
-        "uploadDate":  "2026-10-28",
+        "uploadDate":  "2026-11-07",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingShipping",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -35403,6 +35389,20 @@
         "docType":  "Pago Póliza contra Accidentes/Médico",
         "status":  "Expired",
         "isExpired":  true,
+        "unit":  "Cervecería Ypane"
+    },
+    {
+        "expDate":  "",
+        "carrier":  "FADEL TRANSPORTES PY",
+        "id":  "b3c47e1a-890d-4a59-b5a3-2259395f3c0f",
+        "cpf":  "4182936",
+        "employeeId":  "4a332660-8d28-484a-baaa-d120f6ed1c06",
+        "employeeStatus":  "Active",
+        "driver":  "Mario Federico Torres Caballero",
+        "uploadDate":  "2024-08-16",
+        "docType":  "Capacitación Riesgos Específicos",
+        "status":  "PendingShipping",
+        "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
     {
