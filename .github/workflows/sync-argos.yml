@@ -1,0 +1,49 @@
+name: Sincronizar Argos Ambev en la Nube
+
+on:
+  workflow_dispatch:
+    inputs:
+      argos_user:
+        description: 'Usuario de Argos Ambev'
+        required: false
+        default: 'anika.solis@fadeltransportes.com.br'
+      argos_pass:
+        description: 'Contraseña de Argos Ambev'
+        required: false
+        default: 'Anikafadel@358'
+  schedule:
+    # Ejecución automática dos veces al día (07:00 y 15:00 Paraguay)
+    - cron: '0 10,18 * * *'
+
+jobs:
+  sync-and-deploy:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Sincronizar datos desde Argos Ambev
+        shell: powershell
+        env:
+          ARGOS_USER: ${{ inputs.argos_user || secrets.ARGOS_USER || 'anika.solis@fadeltransportes.com.br' }}
+          ARGOS_PASS: ${{ inputs.argos_pass || secrets.ARGOS_PASS || 'Anikafadel@358' }}
+        run: |
+          powershell -NoProfile -ExecutionPolicy Bypass -File "./scripts/sync-argos-cloud.ps1"
+
+      - name: Publicar cambios en GitHub Pages
+        shell: powershell
+        run: |
+          git config --global user.name "Argos Cloud Sync"
+          git config --global user.email "bot@fadeltransportes.com.br"
+          git add index.html argos-cache.json
+          $status = git status --porcelain
+          if ($status) {
+              git commit -m "Sincronización en vivo con Argos Ambev [skip ci]"
+              git push
+              Write-Host "Cambios publicados en GitHub con éxito."
+          } else {
+              Write-Host "No hubo cambios en los documentos."
+          }
