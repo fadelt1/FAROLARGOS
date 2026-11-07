@@ -1,4 +1,6 @@
 # Script de sincronización autónoma para GitHub Actions
+Add-Type -AssemblyName System.Net.Http
+Add-Type -AssemblyName System.Web
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12 -bor [System.Net.SecurityProtocolType]::Tls13
 
 $user = if ($env:ARGOS_USER) { $env:ARGOS_USER } else { "anika.solis@fadeltransportes.com.br" }
@@ -102,9 +104,15 @@ do {
 
 Write-Host "Total documentos activos recolectados: $($allDocs.Count)"
 
-# 3. Guardar argos-cache.json
+if ($allDocs.Count -lt 50) {
+    Write-Host "ERROR: Se recolectaron muy pocos documentos ($($allDocs.Count)). Abortando para no sobrescribir la base de datos existente."
+    exit 1
+}
+
+# 3. Guardar argos-cache.json y argos-data.js
 $jsonStr = $allDocs | ConvertTo-Json -Depth 6
 [System.IO.File]::WriteAllText("argos-cache.json", $jsonStr, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText("argos-data.js", "const ARGOS_DATA = " + $jsonStr + ";", [System.Text.Encoding]::UTF8)
 
 # 4. Actualizar index.html con los nuevos datos incrustados
 if (Test-Path "index.html") {
@@ -120,5 +128,5 @@ if (Test-Path "index.html") {
     }
     
     [System.IO.File]::WriteAllText("index.html", $newHtml, [System.Text.Encoding]::UTF8)
-    Write-Host "index.html actualizado exitosamente en la nube."
+    Write-Host "index.html y argos-data.js actualizados exitosamente en la nube."
 }

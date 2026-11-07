@@ -38,10 +38,10 @@ jobs:
         run: |
           git config --global user.name "Argos Cloud Sync"
           git config --global user.email "bot@fadeltransportes.com.br"
-          git add index.html argos-cache.json
+          git add index.html argos-cache.json argos-data.js
           $status = git status --porcelain
           if ($status) {
-              git commit -m "Sincronización en vivo con Argos Ambev [skip ci]"
+              git commit -m "Sincronización en vivo con Argos Ambev"
               git push
               Write-Host "Cambios publicados en GitHub con éxito."
           } else {
