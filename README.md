@@ -9,6 +9,5 @@ Dashboard web interactivo para el control y seguimiento en tiempo real del estad
 - **Filtro de Choferes Activos**: Excluye automáticamente choferes inactivos o eliminados.
 - **Filtro Multi-selección de Documentos**: Con los 7 tipos fundamentales predeterminados (Cédula de Identidad, Licencia de Conducir, Inducción Ingreso al Sector Logística, Inducción Ingreso a la Unidad, Antecedentes policiales, Pago Póliza contra Accidentes/Médico, Evaluación Manejo Defensivo).
 - **Exportación a Excel / CSV**: Descarga en un clic con codificación UTF-8 con BOM.
-- **Doble Modo**: 
-  - **Modo Nube (GitHub Pages)**: Funciona en cualquier navegador de forma estática con los datos sincronizados.
-  - **Modo en Vivo (Local)**: Sincronización directa con Argos Ambev mediante el puente local en el puerto 3015.
+- **Sincronización 100% Cloud en Tiempo Real**: Sincroniza directamente con Argos Ambev desde la web mediante GitHub Actions sin necesidad de instalar ni ejecutar nada localmente en tu computadora.
+- **Acceso Web Global**: Disponible directamente a través de GitHub Pages.
