@@ -1050,16 +1050,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "2026-11-10",
+        "expDate":  "",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "1f0e38bb-d77e-4824-9242-590b1d31a6d2",
         "cpf":  "3577969",
         "employeeId":  "6e02bd0e-45db-44bd-ba3f-00844dcbad8b",
         "employeeStatus":  "Active",
         "driver":  "Arsenio Brizuela",
-        "uploadDate":  "2025-11-10",
+        "uploadDate":  "2026-11-09",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "Approved",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -16310,16 +16310,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "2026-11-18",
+        "expDate":  "",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "9d6ad055-eff6-41e8-a8a4-a6dd103552d0",
         "cpf":  "7446703",
         "employeeId":  "d2578707-d4c7-4633-8d49-6a5d9f9c9f10",
         "employeeStatus":  "Active",
         "driver":  "Daniel Alberto Lopez Bobadilla",
-        "uploadDate":  "2026-05-18",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "Approved",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -24570,16 +24570,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "2026-11-18",
+        "expDate":  "",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "7e5be6c3-0b77-4492-bfb5-967935b9d3e7",
         "cpf":  "3497423",
         "employeeId":  "8141c6ef-a7c2-4e2d-867a-04b825dd2f64",
         "employeeStatus":  "Active",
         "driver":  "Marcos Vazquez Olmedo",
-        "uploadDate":  "2026-09-01",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "Approved",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
