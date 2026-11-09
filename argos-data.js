@@ -3892,7 +3892,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "5cec4a9f-104d-4467-9686-66855bd81571",
         "cpf":  "6504659",
@@ -3901,7 +3901,7 @@
         "driver":  "Joshua Evander Riveros Prieto",
         "uploadDate":  "2026-11-09",
         "docType":  "Antecedentes policiales",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -6174,7 +6174,7 @@
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "9ebfde09-9be0-4a29-b733-bd1e8eaa23a0",
         "cpf":  "5737923",
@@ -6183,7 +6183,7 @@
         "driver":  "RODRIGO TROCHE ARRIOLA",
         "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -8008,7 +8008,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2036-09-16",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "c5563d0d-f2e3-4f1c-8d08-a2894c0bdd47",
         "cpf":  "5737923",
@@ -8017,7 +8017,7 @@
         "driver":  "RODRIGO TROCHE ARRIOLA",
         "uploadDate":  "2026-11-09",
         "docType":  "Cédula de Identidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -14658,16 +14658,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-07",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "729b10ab-7fad-414d-abd1-29aff8cb85b5",
         "cpf":  "2861499",
         "employeeId":  "466453cb-95a2-495f-84a9-1d82d1550046",
         "employeeStatus":  "Active",
         "driver":  "Sergio Ramon Manotti Barreto",
-        "uploadDate":  "2026-11-07",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -18396,16 +18396,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-11-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "cd73f838-7b68-451c-ab7b-7bd0efccb96d",
         "cpf":  "2861499",
         "employeeId":  "466453cb-95a2-495f-84a9-1d82d1550046",
         "employeeStatus":  "Active",
         "driver":  "Sergio Ramon Manotti Barreto",
-        "uploadDate":  "2026-11-07",
+        "uploadDate":  "2026-11-09",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -20944,16 +20944,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-07",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "1c958e8f-aeb2-4fe9-b7fc-f0b9bfd079c1",
         "cpf":  "4342861",
         "employeeId":  "b376144f-47d2-4a56-add6-4335fee9cba0",
         "employeeStatus":  "Active",
         "driver":  "Celso Lopez De Vaca",
-        "uploadDate":  "2026-11-07",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -22470,7 +22470,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "44913b2a-842a-41f5-b561-7668071003d9",
         "cpf":  "4169870",
@@ -22479,7 +22479,7 @@
         "driver":  "Nestor Damián Ortigoza",
         "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -24136,16 +24136,16 @@
         "unit":  "Cervecería Ypane, CD Asunción"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-07",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "739edd83-af62-4bba-b4e8-e4ecc0596c62",
         "cpf":  "4041558",
         "employeeId":  "4a3a1152-af51-49ec-81f3-640d0ba46896",
         "employeeStatus":  "Active",
         "driver":  "Edgar Ramón Ibarra Servin",
-        "uploadDate":  "2026-11-07",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -24549,9 +24549,9 @@
         "employeeId":  "594969fa-5d82-4d96-bc7a-2f6a63c885f3",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAHB040",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-09",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -26250,7 +26250,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2036-04-21",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "ab0d5e73-d0ad-48ae-80e4-e68d4678b212",
         "cpf":  "4169870",
@@ -26259,7 +26259,7 @@
         "driver":  "Nestor Damián Ortigoza",
         "uploadDate":  "2026-11-09",
         "docType":  "Cédula de Identidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -30212,7 +30212,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "0e44c198-5f40-4756-8eb1-bbc69af39167",
         "cpf":  "4126735",
@@ -30221,7 +30221,7 @@
         "driver":  "Alcides Centurion Schlender",
         "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -30842,16 +30842,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-07",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "20705509-df40-4ba5-ba31-00aebfffce3b",
         "cpf":  "5495210",
         "employeeId":  "4cda4c9d-eb80-4cfd-859c-671a5cbf074d",
         "employeeStatus":  "Active",
         "driver":  "Liz Miguela Benitez Adorno",
-        "uploadDate":  "2026-11-07",
+        "uploadDate":  "2026-11-09",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -36358,7 +36358,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2030-10-01",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "d37550e4-86d9-4694-b5dc-f2064299c224",
         "cpf":  "4126735",
@@ -36367,7 +36367,7 @@
         "driver":  "Alcides Centurion Schlender",
         "uploadDate":  "2026-11-09",
         "docType":  "Licencia de Conducir",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -37450,7 +37450,7 @@
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
     {
-        "expDate":  "",
+        "expDate":  "2032-04-25",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "f8275470-fc9a-4d6b-955e-0d1b6839e64d",
         "cpf":  "4126735",
@@ -37459,7 +37459,7 @@
         "driver":  "Alcides Centurion Schlender",
         "uploadDate":  "2026-11-09",
         "docType":  "Cédula de Identidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
