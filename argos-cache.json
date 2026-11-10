@@ -14966,16 +14966,16 @@
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
     {
-        "expDate":  "2026-11-11",
+        "expDate":  "",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "7dcbe21f-5133-4fa6-a996-d0e4093f9f7c",
         "cpf":  "3011705",
         "employeeId":  "c0d79e5a-98df-469f-9a6e-02e981c54949",
         "employeeStatus":  "Active",
         "driver":  "Luis Alberto Pereira",
-        "uploadDate":  "2025-11-11",
+        "uploadDate":  "2026-11-10",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "Approved",
+        "status":  "PendingApproval",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
