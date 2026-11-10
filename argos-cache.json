@@ -98,7 +98,7 @@
         "unit":  "CD Asunción"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "03088b79-a2b8-4d7c-b8b9-2db6c643ef44",
         "cpf":  "5777608",
@@ -107,7 +107,7 @@
         "driver":  "Nestor Fabian Almiron Caballero",
         "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
@@ -1064,16 +1064,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-11-09",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "1f0e38bb-d77e-4824-9242-590b1d31a6d2",
         "cpf":  "3577969",
         "employeeId":  "6e02bd0e-45db-44bd-ba3f-00844dcbad8b",
         "employeeStatus":  "Active",
         "driver":  "Arsenio Brizuela",
-        "uploadDate":  "2026-11-09",
+        "uploadDate":  "2026-11-10",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -1246,7 +1246,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "240ebeab-51e3-4eb9-b5a7-f31f840c8022",
         "cpf":  "5171365",
@@ -1255,7 +1255,7 @@
         "driver":  "Juan Daniel Melgarejo Britez",
         "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
@@ -1932,7 +1932,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "3520c36d-7edb-4f47-935a-bf138cb6c3b1",
         "cpf":  "3577969",
@@ -1941,7 +1941,7 @@
         "driver":  "Arsenio Brizuela",
         "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -6328,7 +6328,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "a5a26fed-070c-416c-9a58-ff4ddbff96d9",
         "cpf":  "2209266",
@@ -6337,7 +6337,7 @@
         "driver":  "Alcides Trinidad",
         "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
@@ -8554,7 +8554,7 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "d6cef098-af3e-4e6b-9990-d05e3daa4a4d",
         "cpf":  "5378960",
@@ -8563,7 +8563,7 @@
         "driver":  "Roberto Anacleto Benitez Gonzalez",
         "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
@@ -14630,7 +14630,7 @@
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-11-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "7dcbe21f-5133-4fa6-a996-d0e4093f9f7c",
         "cpf":  "3011705",
@@ -14639,7 +14639,7 @@
         "driver":  "Luis Alberto Pereira",
         "uploadDate":  "2026-11-10",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -14658,16 +14658,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "7e5be6c3-0b77-4492-bfb5-967935b9d3e7",
         "cpf":  "3497423",
         "employeeId":  "8141c6ef-a7c2-4e2d-867a-04b825dd2f64",
         "employeeStatus":  "Active",
         "driver":  "Marcos Vazquez Olmedo",
-        "uploadDate":  "2026-11-09",
+        "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -15932,16 +15932,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-05-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "9d6ad055-eff6-41e8-a8a4-a6dd103552d0",
         "cpf":  "7446703",
         "employeeId":  "d2578707-d4c7-4633-8d49-6a5d9f9c9f10",
         "employeeStatus":  "Active",
         "driver":  "Daniel Alberto Lopez Bobadilla",
-        "uploadDate":  "2026-11-09",
+        "uploadDate":  "2026-11-10",
         "docType":  "Pago Póliza contra Accidentes/Médico",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -20034,6 +20034,20 @@
         "unit":  "Cervecería Ypane"
     },
     {
+        "expDate":  "2027-02-17",
+        "carrier":  "FADEL TRANSPORTES PY",
+        "id":  "0d958f00-f324-4974-85d4-90314e5be941",
+        "cpf":  "4658427",
+        "employeeId":  "108c45c8-c5e3-4072-a09e-ccf43ad45b55",
+        "employeeStatus":  "Active",
+        "driver":  "Jose Manuel Aquino Galeano",
+        "uploadDate":  "2026-02-17",
+        "docType":  "Inducción Ingreso al Sector Logística",
+        "status":  "Approved",
+        "isExpired":  false,
+        "unit":  "Cervecería Ypane"
+    },
+    {
         "expDate":  "2026-03-01",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "0ea8f27d-3635-44fc-a88e-ede4fd736a64",
@@ -20363,9 +20377,9 @@
         "employeeId":  "a1979b79-e8b1-4c01-8186-60e963fa879c",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAIB362",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-10",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -22911,9 +22925,9 @@
         "employeeId":  "754d1e85-da9a-43eb-bfda-ae4f06642ae0",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAHS281",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-10",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -23562,6 +23576,20 @@
         "unit":  "CD Asunción"
     },
     {
+        "expDate":  "2027-03-17",
+        "carrier":  "FADEL TRANSPORTES PY",
+        "id":  "729b75a5-be9e-40e0-9cc2-6f401fa68492",
+        "cpf":  "4658427",
+        "employeeId":  "108c45c8-c5e3-4072-a09e-ccf43ad45b55",
+        "employeeStatus":  "Active",
+        "driver":  "Jose Manuel Aquino Galeano",
+        "uploadDate":  "2026-03-17",
+        "docType":  "Inducción Ingreso a la Unidad",
+        "status":  "Approved",
+        "isExpired":  false,
+        "unit":  "Cervecería Ypane"
+    },
+    {
         "expDate":  "",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "732c3095-561b-4c5d-80e5-2c600675c431",
@@ -23851,20 +23879,6 @@
         "driver":  "Nelson Manolo Gonzalez",
         "uploadDate":  "2026-08-03",
         "docType":  "Informe Médico Anual",
-        "status":  "PendingShipping",
-        "isExpired":  false,
-        "unit":  "Cervecería Ypane"
-    },
-    {
-        "expDate":  "",
-        "carrier":  "FADEL TRANSPORTES PY",
-        "id":  "7b5ca3eb-5aab-43a7-9b29-a3084395d977",
-        "cpf":  "0000730",
-        "employeeId":  "f02664d4-f641-40a7-aa7b-132f9a00e737",
-        "employeeStatus":  "Active",
-        "driver":  "VOLKSWAGEN AAHS282",
-        "uploadDate":  "2026-09-30",
-        "docType":  "Licencia de Conducir",
         "status":  "PendingShipping",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
@@ -26096,20 +26110,6 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
-        "carrier":  "FADEL TRANSPORTES PY",
-        "id":  "b7578bc5-7cef-464c-9dec-81e6bfba768e",
-        "cpf":  "0000730",
-        "employeeId":  "f02664d4-f641-40a7-aa7b-132f9a00e737",
-        "employeeStatus":  "Active",
-        "driver":  "VOLKSWAGEN AAHS282",
-        "uploadDate":  "2026-10-22",
-        "docType":  "Capacitación Riesgos Específicos",
-        "status":  "PendingShipping",
-        "isExpired":  false,
-        "unit":  "Cervecería Ypane"
-    },
-    {
         "expDate":  "2025-10-02",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "b772ed87-d8ac-4ea7-8636-2113c7689f85",
@@ -26502,16 +26502,16 @@
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
     },
     {
-        "expDate":  "",
+        "expDate":  "2036-09-18",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "c2f42f9e-5e32-4483-bbf6-333886a4eb2a",
         "cpf":  "9288873",
         "employeeId":  "c6b800c4-7a7a-4316-97ad-9ff362ebe28f",
         "employeeStatus":  "Active",
         "driver":  "Michael Douglas Ferreira Nascimiento",
-        "uploadDate":  "2026-11-09",
+        "uploadDate":  "2026-11-10",
         "docType":  "Cédula de Identidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -27111,9 +27111,9 @@
         "employeeId":  "abb515e0-5488-4fa3-867e-ae91fa84498a",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAHX642",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-10",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -27979,9 +27979,9 @@
         "employeeId":  "3da68a24-dc95-45b2-bf04-767eda7d9f7f",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAHX976",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-10",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -28217,9 +28217,9 @@
         "employeeId":  "92917990-33e4-4cb3-849f-7c74168f7b0a",
         "employeeStatus":  "Active",
         "driver":  "VOLKSWAGEN AAHX640",
-        "uploadDate":  "2026-10-22",
+        "uploadDate":  "2026-11-10",
         "docType":  "Habilitación  vehicular",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
@@ -29647,20 +29647,6 @@
         "driver":  "Jorge Javier Sosa Roman",
         "uploadDate":  "2026-10-28",
         "docType":  "Antecedentes policiales",
-        "status":  "Approved",
-        "isExpired":  false,
-        "unit":  "Cervecería Ypane"
-    },
-    {
-        "expDate":  "2027-02-17",
-        "carrier":  "FADEL TRANSPORTES PY",
-        "id":  "0d958f00-f324-4974-85d4-90314e5be941",
-        "cpf":  "4658427",
-        "employeeId":  "108c45c8-c5e3-4072-a09e-ccf43ad45b55",
-        "employeeStatus":  "Active",
-        "driver":  "Jose Manuel Aquino Galeano",
-        "uploadDate":  "2026-02-17",
-        "docType":  "Inducción Ingreso al Sector Logística",
         "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
@@ -32632,20 +32618,6 @@
         "status":  "PendingShipping",
         "isExpired":  false,
         "unit":  "Cervecería Ypane, CD Asunción, CD GUARAMBARE"
-    },
-    {
-        "expDate":  "2027-03-17",
-        "carrier":  "FADEL TRANSPORTES PY",
-        "id":  "729b75a5-be9e-40e0-9cc2-6f401fa68492",
-        "cpf":  "4658427",
-        "employeeId":  "108c45c8-c5e3-4072-a09e-ccf43ad45b55",
-        "employeeStatus":  "Active",
-        "driver":  "Jose Manuel Aquino Galeano",
-        "uploadDate":  "2026-03-17",
-        "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "Approved",
-        "isExpired":  false,
-        "unit":  "Cervecería Ypane"
     },
     {
         "expDate":  "",
@@ -35854,16 +35826,16 @@
         "unit":  "Cervecería Ypane"
     },
     {
-        "expDate":  "",
+        "expDate":  "2027-11-10",
         "carrier":  "FADEL TRANSPORTES PY",
         "id":  "df5bd55e-aa87-490a-9881-657db49a8400",
         "cpf":  "7097243",
         "employeeId":  "8fc2f766-8055-4050-a1fb-785dd9d5d3b2",
         "employeeStatus":  "Active",
         "driver":  "Miguel Patiño Cabral",
-        "uploadDate":  "2026-11-09",
+        "uploadDate":  "2026-11-10",
         "docType":  "Inducción Ingreso a la Unidad",
-        "status":  "PendingApproval",
+        "status":  "Approved",
         "isExpired":  false,
         "unit":  "Cervecería Ypane"
     },
